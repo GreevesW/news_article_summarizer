@@ -8,6 +8,7 @@ main.py
 chatgpt.py
 webscraper.py
 README.txt
+requirements.txt
 
 The audio file will be saved as Summary.mp3 after the code has been run.
 
