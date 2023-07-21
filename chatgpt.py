@@ -29,8 +29,8 @@ print(response)
 final = response.choices[0].text
 #Stores the text portion of the response from chatGPT in the variable final
 
-originalchr = [ chr(34), chr(39), chr(194), "©", "$", "£", chr(92), "&"]
-newchr = [ "", "", "", "", " dollars", " pounds", "", "and"]
+originalchr = [ chr(34), chr(39), chr(194), "©", chr(92), "&"]
+newchr = [ "", "", "", "", "", "and"]
 
 for i in range(0,8):
   final = final.replace( originalchr[i], newchr[i])
