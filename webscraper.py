@@ -16,11 +16,11 @@ for body in soup.find_all('body'):
 
 #removes any invalid characters from the text
 content = newtext
-originalchr = [ chr(34), chr(39), chr(194), "©", "$", "£", chr(92), "&"]
-newchr = [ "", "", "", "", " dollars", " pounds", "", "and"]
+originalchr = [ chr(34), chr(39), chr(194), "©", chr(92), "&"]
+newchr = [ "", "", "", "", "", "and"]
 
 #replaces the invalid characters with the valid alternative in the newchr array
-for i in range(0,8):
+for i in range(0,6):
   content = content.replace( originalchr[i], newchr[i])
 
 
