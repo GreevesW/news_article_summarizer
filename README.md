@@ -1,50 +1,142 @@
-Explanation of the code:
+# Web Scraper to Audio Summary
 
-The webscraper.py file runs first and asks for the URL of a webpage to be entered. Using the beautiful soup module from the bs4 libary, the program gets all of the text between the body tags of the websites html file. Validation is then carried out using a for loop to remove any unusable special characters from the code ( such as "©" and "&"). The content between the body tags is then imported into the chatgpt.py file. The content is then inserted into a prewritten chatGPT prompt and the response is saved. The chatGPT response is then sent to the main.py file where it is saved as a script. The script is then compiled into a TTS audio file which is saved as Summary.mp3 .
+A Python application that scrapes webpage content, generates a summary using ChatGPT, and converts it to an audio file using text-to-speech.
 
-File list:
+## Overview
 
-main.py
-chatgpt.py
-webscraper.py
-README.txt
-requirements.txt
+This project automatically:
+1. Scrapes text content from any webpage
+2. Generates a concise summary using ChatGPT
+3. Converts the summary to an MP3 audio file
 
-The audio file will be saved as Summary.mp3 after the code has been run.
+## How It Works
 
-ChatGPT prompt:
+### Workflow
 
-- The temperature variable changes the randomness of the chatGPT response.
-- The max tokens is set to 300 to ensure that a full response can be retrieved from chatGPT.
-- The prompt asks ChatGPT to keep the response under 340 characters. This is done to keep the audio file under 30 seconds, but can be changed to any desired value.
+1. **webscraper.py** - Extracts webpage content
+   - Prompts user for a URL
+   - Uses BeautifulSoup to extract text from `<body>` tags
+   - Validates and removes special characters (e.g., `©`, `&`)
+   - Passes cleaned content to ChatGPT module
 
-API Keys:
+2. **chatgpt.py** - Generates summary
+   - Receives scraped content
+   - Sends content to ChatGPT API with custom prompt
+   - Returns AI-generated summary
 
-<<<<<<< HEAD
-Unique API keys for the chatGPT API and Aflorithmic Audiostack API are required for line 6 in chatgpt.py and line 12 in main.py respectively. These API keys can be imported or stored as privates. 
-=======
-Unique API keys for the chatGPT API and Aflorithmic Audiostack API are required for line 6 in chatgpt.py and line 12 in main.py respectively. These API keys can be imported or stored as secrets. 
->>>>>>> upstream/main
+3. **main.py** - Creates audio file
+   - Receives ChatGPT summary
+   - Converts text to speech using Audiostack API
+   - Saves output as `Summary.mp3`
 
-Installation:
+## File Structure
 
-- follow the chat gpt quick start guide for information on how to install the requirements. https://platform.openai.com/docs/quickstart
+```
+.
+├── main.py
+├── chatgpt.py
+├── webscraper.py
+├── README.md
+└── requirements.txt
+```
 
-- The SDK for audiostack can be installed using the command 
-"pip install -U audiostack" or "pip3 install -U audiostack"
-Audiostack SDK quick start: https://docs.audiostack.ai/docs/getting-started#quickstarts
+## Installation
 
-- Beautiful soup can be installed using the command "pip install beautifulsoup4"
+### Prerequisites
 
-Known Bugs:
+- Python 3.7+
+- OpenAI API key
+- Audiostack API key
 
-- Some webpages may cause an error to occur if the chatGPT reply contains special characters wwhich cannot be used in the audiostack TTS model.
+### Setup Steps
 
-Troubleshooting:
+1. **Install ChatGPT requirements**
+   
+   Follow the [ChatGPT Quick Start Guide](https://platform.openai.com/docs/quickstart) for detailed instructions.
 
-- Check that the chatGPT script does not have any unusual special characters. (E.g. \ or | )
+2. **Install Audiostack SDK**
+   
+   ```bash
+   pip install -U audiostack
+   ```
+   
+   or
+   
+   ```bash
+   pip3 install -U audiostack
+   ```
+   
+   See [Audiostack SDK Quick Start](https://docs.audiostack.ai/docs/getting-started#quickstarts) for more information.
 
--Verify that the chatGPT API, audiostack API, and BeautifulSoup libary have been correctly installed.
+3. **Install BeautifulSoup**
+   
+   ```bash
+   pip install beautifulsoup4
+   ```
 
+## Configuration
 
+### API Keys
 
+You'll need to configure API keys in the following locations:
+
+- **ChatGPT API**: Line 6 in `chatgpt.py`
+- **Audiostack API**: Line 12 in `main.py`
+
+API keys can be stored as environment variables or imported as needed.
+
+### ChatGPT Prompt Settings
+
+The ChatGPT prompt can be customized with the following parameters:
+
+- **Temperature**: Controls randomness of the response
+- **Max Tokens**: Set to 300 to ensure complete responses
+- **Character Limit**: Response limited to 340 characters (produces ~30 second audio)
+  - Can be adjusted to any desired length
+
+## Usage
+
+1. Run the webscraper:
+   ```bash
+   python webscraper.py
+   ```
+
+2. Enter the URL when prompted
+
+3. Wait for processing to complete
+
+4. Find your audio summary saved as `Summary.mp3`
+
+## Known Issues
+
+- Some webpages may cause errors if the ChatGPT response contains special characters incompatible with the Audiostack TTS model
+- Characters like `\` or `|` may cause processing failures
+
+## Troubleshooting
+
+If you encounter errors:
+
+1. **Check ChatGPT output** - Verify the script doesn't contain unusual special characters (e.g., `\`, `|`)
+2. **Verify installations** - Ensure all APIs and libraries are correctly installed:
+   - ChatGPT API
+   - Audiostack API
+   - BeautifulSoup library
+3. **Test API keys** - Confirm both API keys are valid and properly configured
+
+## Output
+
+The final audio file will be saved as **Summary.mp3** in the project directory.
+
+## Dependencies
+
+- `beautifulsoup4` - Web scraping
+- `openai` - ChatGPT API integration
+- `audiostack` - Text-to-speech conversion
+
+## License
+
+[Add your license here]
+
+## Contributing
+
+[Add contribution guidelines here]
